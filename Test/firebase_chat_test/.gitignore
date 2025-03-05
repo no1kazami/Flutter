@@ -46,3 +46,5 @@ app.*.map.json
 
 # ignore files
 analysis_options.yaml
+firebase-tools-instant-win.exe
+/android/app/google-services.json
