@@ -4,22 +4,18 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-        {
-            "name": "firebase_chat_test",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "firebase_chat_test (profile mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "profile"
-        },
-        {
-            "name": "firebase_chat_test (release mode)",
-            "request": "launch",
-            "type": "dart",
-            "flutterMode": "release"
-        }
+      {
+        "name": "Launch on Emulator 1",
+        "type": "dart",
+        "request": "launch",
+        "deviceId": "emulator-5554"
+      },
+      {
+        "name": "Launch on Emulator 2",
+        "type": "dart",
+        "request": "launch",
+        "deviceId": "emulator-5556"
+      }
     ]
 }
+  
