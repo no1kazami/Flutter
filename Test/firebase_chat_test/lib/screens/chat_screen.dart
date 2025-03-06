@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -53,8 +54,30 @@ class _ChatScreenState extends State<ChatScreen> {
           )
         ],
       ),
-      body: Center(
-        child: Text('Chat Screen'),
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('chats/mUb5OYh5OCh7LntICE6E/message')
+            .snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.hasData) {
+            final docs = snapshot.requireData.docs;
+            return ListView.builder(
+              itemCount: docs.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    docs[index]['text'],
+                    style: TextStyle(fontSize: 20.0),
+                  ),
+                );
+              },
+            );
+          } else {
+            return CircularProgressIndicator();
+          }
+        },
       ),
     );
   }
