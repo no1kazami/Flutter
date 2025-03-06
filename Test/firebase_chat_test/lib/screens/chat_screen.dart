@@ -1,3 +1,5 @@
+import 'package:firebase_chat_test/chatting/chat/message.dart';
+import 'package:firebase_chat_test/chatting/chat/new_message.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -39,46 +41,30 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Chat screen'),
-        actions: [
-          IconButton(
-            icon: Icon(
-              Icons.exit_to_app_sharp,
-              color: Colors.white,
-            ),
-            onPressed: () {
-              _authentication.signOut();
-              //Navigator.pop(context);
-            },
-          )
-        ],
-      ),
-      body: StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('chats/mUb5OYh5OCh7LntICE6E/message')
-            .snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.hasData) {
-            final docs = snapshot.requireData.docs;
-            return ListView.builder(
-              itemCount: docs.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    docs[index]['text'],
-                    style: TextStyle(fontSize: 20.0),
-                  ),
-                );
+        appBar: AppBar(
+          title: Text('Chat screen'),
+          actions: [
+            IconButton(
+              icon: Icon(
+                Icons.exit_to_app_sharp,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                _authentication.signOut();
+                //Navigator.pop(context);
               },
-            );
-          } else {
-            return CircularProgressIndicator();
-          }
-        },
-      ),
-    );
+            )
+          ],
+        ),
+        body: Container(
+          child: Column(
+            children: [
+              Expanded(
+                child: Messages(),
+              ),
+              NewMessage(),
+            ],
+          ),
+        ));
   }
 }
