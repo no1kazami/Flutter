@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             onPressed: () {
               _authentication.signOut();
-              Navigator.pop(context);
+              //Navigator.pop(context);
             },
           )
         ],
